@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { TOKEN_SECRET } from '../config.js';
 
-export const register = async (req, res) => {
+export const registerR = async (req, res) => {
   const { nombre, apellido, telefono, correo, username, password, tipoUser } = req.body;
 
   try {
@@ -53,7 +53,7 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+export const loginR = async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -98,12 +98,12 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = async (req, res) => {
+export const logoutR = async (req, res) => {
   res.clearCookie('token');
   return res.sendStatus(200);
 };
 
-export const profile = async (req, res) => {
+export const profileR = async (req, res) => {
   const token = req.cookies.token;
 
   if (!token) {
@@ -149,7 +149,7 @@ export const profile = async (req, res) => {
   });
 };
 
-export const putUser = async (req, res) => {
+export const putUserR = async (req, res) => {
   try {
       const { error } = await supabase
           .from('usuarios')
@@ -167,7 +167,7 @@ export const putUser = async (req, res) => {
   }
 }
 
-export const verifyToken = async (req, res) => {
+export const verifyTokenR = async (req, res) => {
   const token = req.cookies.token;
 
   if (!token) {

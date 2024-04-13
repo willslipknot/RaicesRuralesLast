@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { createVehiculoRequest, updateVehiculoRequest, deleteVehiculoRequest, getVehiculoRequest, getVehiculosRequest, getVehRequest } from '../api/vehiculos'
+import { createVehiculoR, putVehiculoR, deleteVehiculoR, getVehiculoR, getVehiculosR, getVehR } from '../api/vehiculos'
 
 
 const VehiculoContext = createContext();
@@ -20,7 +20,7 @@ export function VehiculoProvider({ children }) {
 
     const getVehiculos = async () => {
         try {
-            const res = await getVehiculosRequest();
+            const res = await getVehiculosR();
             setVehiculos(res.data)
             console.log(res)
 
@@ -31,14 +31,14 @@ export function VehiculoProvider({ children }) {
     }
 
     const getVeh = async (clase) => {
-        const res = await getVehRequest(clase)
+        const res = await getVehR(clase)
         return res.data
   
     }
 
     const getContVehiculos = async () => {
         try {
-            const res = await getVehiculosRequest();
+            const res = await getVehiculosR();
             setVehiculos(res.data);
     
             const numVehiculo = res.data.length;
@@ -50,13 +50,13 @@ export function VehiculoProvider({ children }) {
     }
 
     const createVehiculos = async (vehiculo) => {
-        const res = await createVehiculoRequest(vehiculo)
+        const res = await createVehiculoR(vehiculo)
         console.log(res)
     }
 
     const deleteVehiculo = async (id) => {
         try {
-            const res = await deleteVehiculoRequest(id)
+            const res = await deleteVehiculoR(id)
             if (res.status == 200) setVehiculos(vehiculos.filter(vehiculo => vehiculo.id !== id))
             console.log(res)
         } catch (error) {
@@ -66,13 +66,13 @@ export function VehiculoProvider({ children }) {
     }
 
     const getVehiculo = async (id) => {
-        const res = await getVehiculoRequest(id)
+        const res = await getVehiculoR(id)
         return res.data
     }
 
     const updateVehiculo = async (id, vehiculo) => {
         try {
-            const res = await updateVehiculoRequest(id, vehiculo);
+            const res = await putVehiculoR(id, vehiculo);
             if (res.status === 200) {
                 setVehiculos(prevVehiculos => {
                     return prevVehiculos.map(prevVehiculo => {

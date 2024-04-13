@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react"
-import { getReservaRequest, getReservasRequest } from '../api/reservas'
+import { getReservasR, getReservaR } from '../api/reservas'
 
 
 const reservaContext = createContext();
@@ -19,7 +19,7 @@ export function ReservaProvider({ children }) {
 
     const getReservas = async () => {
         try {
-            const res = await getReservasRequest();
+            const res = await getReservaR();
             const reservasOrdenadas = res.data.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
 
             return reservasOrdenadas;
@@ -33,7 +33,7 @@ export function ReservaProvider({ children }) {
 
     const getFechaReservas = async () => {
         try {
-            const res = await getReservasRequest();
+            const res = await getReservaR();
             const fechaActual = new Date().toISOString().split('T')[0];
             const reservasDelDia = res.data.filter((reserva) => reserva.fecha === fechaActual);
 
@@ -45,13 +45,13 @@ export function ReservaProvider({ children }) {
     };
 
     const getReserva = async (id) => {
-        const res = await getReservaRequest(id)
+        const res = await getReservasR(id)
         return res.data
     }
 
     const getContReserva = async () => {
         try {
-            const res = await getReservasRequest();
+            const res = await getReservaR();
             const fechaActual = new Date().toISOString().split('T')[0];
             const reservasDelDia = res.data.filter((reserva) => reserva.fecha === fechaActual);
 
@@ -68,7 +68,7 @@ export function ReservaProvider({ children }) {
 
     const getTopActivities = async () => {
         try {
-            const res = await getReservasRequest();
+            const res = await getReservaR();
             const reservasOrdenadas = res.data.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
 
             return reservasOrdenadas;

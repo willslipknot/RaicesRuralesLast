@@ -1,6 +1,6 @@
 import supabase from "../db1.js";
 
-export const getVehiculos = async (req, res) => {
+export const getVehiculosR = async (req, res) => {
     try {
         const { data: vehiculos, error } = await supabase
             .from('vehiculos')
@@ -17,7 +17,7 @@ export const getVehiculos = async (req, res) => {
     }
 }
 
-export const getVehiculo = async (req, res) => {
+export const getVehiculoR = async (req, res) => {
     try {
         const { data: vehiculo, error } = await supabase
             .from('vehiculos')
@@ -40,7 +40,7 @@ export const getVehiculo = async (req, res) => {
     }
 }
 
-export const createVehiculo = async (req, res) => {
+export const createVehiculoR = async (req, res) => {
     const { placa, marca, linea, modelo, cilindrada, color, clase, carroceria, combustible, propietario, identificacion, num_ident } = req.body;
     const { filename: imagenes } = req.file;
 
@@ -67,7 +67,7 @@ export const createVehiculo = async (req, res) => {
     }
 }
 
-export const deleteVehiculo = async (req, res) => {
+export const deleteVehiculoR = async (req, res) => {
     try {
         const { error } = await supabase
             .from('vehiculos')
@@ -85,7 +85,7 @@ export const deleteVehiculo = async (req, res) => {
     }
 }
 
-export const putVehiculo = async (req, res) => {
+export const putVehiculoR = async (req, res) => {
     try {
         const { error } = await supabase
             .from('vehiculos')
@@ -103,7 +103,7 @@ export const putVehiculo = async (req, res) => {
     }
 }
 
-export const getVeh = async (req, res) => {
+export const getVehR = async (req, res) => {
     const { clase } = req.params;
     try {
         const { data: vehiculos, error } = await supabase

@@ -1,6 +1,6 @@
 import supabase from "../db1.js";
 
-export const getReservas = async (req, res) => {
+export const getReservasR = async (req, res) => {
     try {
         const { data: reservas, error } = await supabase
             .from('reservas')
@@ -17,7 +17,7 @@ export const getReservas = async (req, res) => {
     }
 }
 
-export const getReserva = async (req, res) => {
+export const getReservaR = async (req, res) => {
     try {
         const { data: reserva, error } = await supabase
             .from('reservas')

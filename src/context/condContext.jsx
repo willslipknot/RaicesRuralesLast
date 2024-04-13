@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react"
-import { createCondRequest, updateCondRequest, deleteCondRequest, getCondRequest, getCondsRequest, getimgRequest } from '../api/cond'
+import { createCondR, putCondR, deleteCondR, getCondR, getCondsR, getimgR } from '../api/cond'
 
 
 const condContext = createContext();
@@ -19,7 +19,7 @@ export function CondProvider({ children }) {
 
     const getConds = async () => {
         try {
-            const res = await getCondsRequest();
+            const res = await getCondsR();
             setConds(res.data)
             console.log(res)
 
@@ -31,7 +31,7 @@ export function CondProvider({ children }) {
 
     const getimg = async () => {
         try {
-            const res = await getimgRequest();
+            const res = await getimgR();
             setActs(res.data.image)
             console.log(res)
 
@@ -43,7 +43,7 @@ export function CondProvider({ children }) {
 
     const getContConds = async () => {
         try {
-            const res = await getCondsRequest();
+            const res = await getCondsR();
             setConds(res.data);
     
             const numCond = res.data.length;
@@ -55,13 +55,13 @@ export function CondProvider({ children }) {
     }
 
     const createConds = async (cond) => {
-        const res = await createCondRequest(cond)
+        const res = await createCondR(cond)
         console.log(res)
     }
 
     const deleteCond = async (id) => {
         try {
-            const res = await deleteCondRequest(id)
+            const res = await deleteCondR(id)
             if (res.status == 200) setConds(conds.filter(cond => cond.id !== id))
             console.log(res)
         } catch (error) {
@@ -71,13 +71,13 @@ export function CondProvider({ children }) {
     }
 
     const getCond = async (id) => {
-        const res = await getCondRequest(id)
+        const res = await getCondR(id)
         return res.data
     }
 
     const updateCond = async (id, cond) => {
         try {
-            const res = await updateCondRequest(id, cond);
+            const res = await putCondR(id, cond);
             if (res.status === 200) {
                 setConds(prevConds => {
                     return prevConds.map(prevCond => {

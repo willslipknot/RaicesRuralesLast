@@ -1,6 +1,6 @@
 import supabase from "../db1.js";
 
-export const getConds = async (req, res) => {
+export const getCondsR = async (req, res) => {
     try {
         const { data: conductores, error } = await supabase
             .from('conductores')
@@ -17,7 +17,7 @@ export const getConds = async (req, res) => {
     }
 };
 
-export const getCond = async (req, res) => {
+export const getCondR = async (req, res) => {
     try {
         const { data: conductor, error } = await supabase
             .from('conductores')
@@ -40,7 +40,7 @@ export const getCond = async (req, res) => {
     }
 };
 
-export const createCond = async (req, res) => {
+export const createCondR = async (req, res) => {
     const { nombre, apellido, licencia, vehiculo, clase } = req.body;
     const { filename: foto } = req.file;
 
@@ -67,7 +67,7 @@ export const createCond = async (req, res) => {
     }
 };
 
-export const deleteCond = async (req, res) => {
+export const deleteCondR = async (req, res) => {
     try {
         const { error } = await supabase
             .from('conductores')
@@ -85,7 +85,7 @@ export const deleteCond = async (req, res) => {
     }
 }
 
-export const putCond= async (req, res) => {
+export const putCondR= async (req, res) => {
     try {
         const { error } = await supabase
             .from('conductores')
@@ -102,3 +102,20 @@ export const putCond= async (req, res) => {
         res.status(500).json(["Error interno del servidor"]);
     }
 }
+
+export const getimgR = async (req, res) => {
+    try {
+        const { data: conductores, error } = await supabase
+            .from('conductores')
+            .select('*');
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        res.json(conductores);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(["Error interno del servidor"]);
+    }
+};

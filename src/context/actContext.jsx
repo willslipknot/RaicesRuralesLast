@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react"
-import { createActRequest, deleteActRequest, getActRequest, getActsRequest, updateActRequest } from '../api/acts'
+import { createActR, deleteActR, getActR , getActsR, putActR, getImgR } from '../api/acts'
 
 
 const ActContext = createContext();
@@ -19,7 +19,7 @@ export function ActProvider({ children }) {
 
     const getActs = async () => {
         try {
-            const res = await getActsRequest();
+            const res = await getActsR();
             setActs(res.data)
             console.log(res)
 
@@ -31,7 +31,7 @@ export function ActProvider({ children }) {
 
     const getContActs = async () => {
         try {
-            const res = await getActsRequest();
+            const res = await getActsR();
             setActs(res.data)
             const numActs = res.data.length;
             console.log(`Número de datos recibidos: ${numActs}`);
@@ -45,7 +45,7 @@ export function ActProvider({ children }) {
 
     const getimg = async () => {
         try {
-            const res = await getimgRequest();
+            const res = await getImgR();
             setActs(res.data.image)
             console.log(res)
 
@@ -56,13 +56,13 @@ export function ActProvider({ children }) {
     }
 
     const createActs = async (act) => {
-        const res = await createActRequest(act)
+        const res = await createActR(act)
         console.log(res)
     }
 
     const deleteAct = async (id) => {
         try {
-            const res = await deleteActRequest(id)
+            const res = await deleteActR(id)
             if (res.status == 200) setActs(acts.filter(act => act.id !== id))
             console.log(res)
         } catch (error) {
@@ -72,13 +72,13 @@ export function ActProvider({ children }) {
     }
 
     const getAct = async (id) => {
-        const res = await getActRequest(id)
+        const res = await getActR (id)
         return res.data
     }
 
     const updateAct = async (id, act) => {
         try {
-            const res = await updateActRequest(id, act);
+            const res = await putActR(id, act);
             if (res.status === 200) {
                 setActs(prevActs => {
                     return prevActs.map(prevAct => {

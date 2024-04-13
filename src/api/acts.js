@@ -1,6 +1,6 @@
 import supabase from "../db1.js";
 
-export const getActs = async (req, res) => {
+export const getActsR = async (req, res) => {
     try {
         const { data: actividades, error } = await supabase
             .from('actividades')
@@ -17,7 +17,7 @@ export const getActs = async (req, res) => {
     }
 };
 
-export const getAct = async (req, res) => {
+export const getActR = async (req, res) => {
     try {
         const { data: actividad, error } = await supabase
             .from('actividades')
@@ -40,7 +40,7 @@ export const getAct = async (req, res) => {
     }
 };
 
-export const createAct = async (req, res) => {
+export const createActR = async (req, res) => {
     const { nombre, direccion, descripcion, tipo } = req.body;
     const { filename: imagen } = req.file;
 
@@ -67,7 +67,7 @@ export const createAct = async (req, res) => {
     }
 };
 
-export const deleteAct = async (req, res) => {
+export const deleteActR = async (req, res) => {
     try {
         const { data: actividad, error } = await supabase
             .from('actividades')
@@ -89,7 +89,7 @@ export const deleteAct = async (req, res) => {
     }
 };
 
-export const putAct = async (req, res) => {
+export const putActR = async (req, res) => {
     try {
         const { error } = await supabase
             .from('actividades')
@@ -106,3 +106,19 @@ export const putAct = async (req, res) => {
         res.status(500).json(["Error interno del servidor"]);
     }
 }
+export const getImgR = async (req, res) => {
+    try {
+        const { data: actividades, error } = await supabase
+            .from('actividades')
+            .select('*');
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        res.json(actividades);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(["Error interno del servidor"]);
+    }
+};
